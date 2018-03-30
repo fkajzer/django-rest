@@ -2,6 +2,8 @@
   - CRUD: Create Retrieve Update Delete (HTTP methods)
   - Create & List & Search
 
+  + Permissions
+
 2. HTTP methods
   - GET, POST, PUT, PATCH, DELETE
 

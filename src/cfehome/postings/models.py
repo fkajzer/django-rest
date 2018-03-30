@@ -11,4 +11,8 @@ class BlogPost(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        return self.user.username
+
+    @property
+    def owner(self):
         return self.user
