@@ -8,6 +8,7 @@ from .permissions import IsOwnerOrReadOnly
 class BlogPostAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     lookup_field = 'pk'  # url(r'?P<pk>\d+')
     serializer_class = BlogPostSerializer
+    permission_classes = [ IsOwnerOrReadOnly ]
     # queryset = BlogPost.objects.all()
 
     def get_queryset(self):
@@ -26,6 +27,8 @@ class BlogPostAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}
 
 class BlogPostRUDView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'  # url(r'?P<pk>\d+')
@@ -35,6 +38,9 @@ class BlogPostRUDView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return BlogPost.objects.all()
+
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}
 
 #   use built in method, same as:
 #    def get_object(self):
